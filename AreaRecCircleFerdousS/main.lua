@@ -12,15 +12,15 @@
 -- Your code here
 --create my variable
 local areaText
-local textSiz=40
+local textSize=40
 local widthOfRectangle = 40
 local myRectangle
 local hightOfRectangle=200
 local areaOfRectangle
 -- this code is for backgrouncolor
 display.setDefault("background", 250/100,100/250, 100/250)
---draw rectangle
-myRectangle= display.newRect(0, 0, widthOfRectangle, hightOfRectangle )
+--draw rectangle that is half of the width and height of screen
+myRectangle = display.newRect(0, 0,  widthOfRectangle, heightOfRectangle )
 
 --positionning rectangle
 myRectangle.anchorX = 0
@@ -33,5 +33,18 @@ myRectangle.strokewidth=20
 
 --set color for rectangle
 myRectangle:setFillColor(0.5, 0.2, 0.6)
+
 --set color for border-
-myRectangle:setstrokecolor(1,1,1)
+
+myRectangle:setStrokecolor(0, 1, 0)
+--calculation
+areaOfRectangle= widthOfRectangle * heightOfRectangle
+areaText = display.newText("the are of the Rectangle with the width of ".. widthOfRectangle .." and heigh of " .. heightOfRectangle.." is "..areaOfRectangle.. "pixels", 0,0, Arial, textSize )
+-- anchor the text and set x, y position
+
+areaText.anchorX=20
+areaText.anchorY= 20
+areaText.x= 20
+areaText.y=display.contentHeight/2
+-- set the color for text
+areaText:setTextColor(1,1,1)
