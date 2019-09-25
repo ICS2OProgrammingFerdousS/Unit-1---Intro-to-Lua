@@ -39,8 +39,15 @@ scrollSpeed = 6
 
 local  secondShip =display.newImageRect("Images/octopus.png", 200, 200)
 
-
 secondShip.alpha = 0
+secondShip:scale(-1, 1)
 
-secondShip.x = 0
-secondShip.y = display.contentHeight/2
+secondShip.x = 900
+secondShip.y = display.contentHeight/1.5
+
+function mymoving( event )
+	secondShip.x = secondShip.x -scrollSpeed
+	secondShip.alpha= secondShip.alpha + 0.05 
+
+end
+Runtime:addEventListener("enterFrame", mymoving)
