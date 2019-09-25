@@ -27,16 +27,12 @@ myRectangle.anchorX = 0
 myRectangle.anchorY = 0
 myRectangle.x=300
 myRectangle.y=150
-
 --set width for border
-
 myRectangle.strokewidth=700
-
 --set color for rectangle
 myRectangle:setFillColor(0.2, 0.2, 0.8)
 
 --set color for border-
-
 myRectangle:setStrokeColor(0, 1, 0)
 --calculation
 areaOfRectangle= widthOfRectangle * heightOfRectangle
