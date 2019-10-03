@@ -17,6 +17,8 @@ firstButton.isVisible= true
 secondButton.x= display.contentWidth/2
 secondButton.y=display.contentHeight/2
 secondButton.isVisible= false
+local wrongSound = audio.loadSound("Sounds/Wrong Buzzer.mp3")
+
 
 local myCross=display.newImageRect("Images/red_x.png", 197, 96)
 
@@ -29,7 +31,6 @@ writeText.x=display.contentWidth/2
 writeText.y=display.contentHeight/3
 writeText:setTextColor(1, 0.6, 0.5)
 writeText.isVisible=false
-local wrongSound = audio.loadSound("Sounds/Wrong Buzzer.mp3")
 
 local function mybutton( touch )
 	if(touch.phase =="began") then
