@@ -38,7 +38,7 @@ display.setDefault("background", 0, 0, 0.2)
 	correct.isVisible=false
 
 	wrongAnswer= display.newText("Wrong answer!", display.contentWidth/2, display.contentHeight*2/3, nil, 50)
-	wrongAnswer:setTextColor(0.5,0.6,1)
+	wrongAnswer:setTextColor(1, 0.4, 0.5)
 	wrongAnswer.isVisible=false
 
 

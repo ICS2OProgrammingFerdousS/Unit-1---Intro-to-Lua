@@ -30,15 +30,22 @@ display.setDefault("background", 0, 0, 0.2)
 	local correctAnswer
 	local wrongAnswer
 	local point=0
+	local textSize=90
 	local wrongAnswerSound = audio.loadSound("Sound/Wrong Buzzer.mp3")
 
 --display question and set color
+
 
 	question= display.newText("", display.contentWidth/3, display.contentHeight/2, nil, 50)
 
 	question:setTextColor(1, 0.7, 1)
 
-pointText= display.newText("point = " .. point, display.contentWidth/3, display.contentHeight/2)
+pointText= display.newText("point = " .. point, display.contentWidth/1.1, display.contentHeight/4.5, " pixels", Arial,"textSize")
+
+
+pointText:setTextColor(1, 0.4, 0.5)
+
+--pointText=50
 
 --creating correct text object and its status
 
