@@ -29,13 +29,13 @@ writeText.x=display.contentWidth/2
 writeText.y=display.contentHeight/3
 writeText:setTextColor(1, 0.6, 0.5)
 writeText.isVisible=false
+local wrongSound = audio.loadSound("Sounds/Wrong Buzzer.mp3")
 
 local function mybutton( touch )
 	if(touch.phase =="began") then
 		firstButton.isVisible=false
 		secondButton.isVisible=true
 		writeText.isVisible= true
-		audio.play("")
 	end
 	if(touch.phase=="ended")then
 
@@ -53,8 +53,7 @@ local function mybutton( touch )
       	secondButton.isVisible= false
       	firstButton.isVisible= true
       	myCross.isVisible=true
-      	audio.play("Sounds/Wrong Buzzer")
-
+ local wrongSound = audio.play(wrongSound)
     end
     if(touch.phase=="ended")then
 

@@ -5,3 +5,6 @@
 -----------------------------------------------------------------------------------------
 
 -- Your code here
+
+display.setStatusBar(display.HiddenStatusBar)
+display.setDefault("background", 1, 0.6, 0.7)
