@@ -1,6 +1,13 @@
 -----------------------------------------------------------------------------------------
 --
 -- main.lua
+--
+-----------------------------------------------------------------------------------------
+-- Your code here
+
+-----------------------------------------------------------------------------------------
+--
+-- main.lua
 --Ferdous S
 -- Calculation game
 
@@ -22,6 +29,7 @@ display.setDefault("background", 0, 0, 0.2)
 	local yourAnswer
 	local correctAnswer
 	local wrongAnswer
+	local point=0
 	local wrongAnswerSound = audio.loadSound("Sound/Wrong Buzzer.mp3")
 
 --display question and set color
@@ -30,6 +38,7 @@ display.setDefault("background", 0, 0, 0.2)
 
 	question:setTextColor(1, 0.7, 1)
 
+pointText= display.newText("point = " .. point, display.contentWidth/3, display.contentHeight/2)
 
 --creating correct text object and its status
 
@@ -73,6 +82,8 @@ display.setDefault("background", 0, 0, 0.2)
            if(yourAnswer== correctAnswer) then
            	correct.isVisible= true
           	timer.performWithDelay(2000, hideAnswer)
+            point = point + 1
+            pointText.text = "point = " .. point
 
             else 
              
