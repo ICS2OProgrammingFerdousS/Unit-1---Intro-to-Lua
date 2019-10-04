@@ -31,7 +31,8 @@ display.setDefault("background", 0, 0, 0.2)
 	local wrongAnswer
 	local point=0
 	local textSize=90
-	local wrongAnswerSound = audio.loadSound("Sound/Wrong Buzzer.mp3")
+	--local wrongAnswerSound = audio.loadSound("Sound/Wrong Buzzer.mp3")
+	local mistake=0
 
 --display question and set color
 
@@ -42,6 +43,9 @@ display.setDefault("background", 0, 0, 0.2)
 
 pointText= display.newText("point = " .. point, display.contentWidth/1.1, display.contentHeight/4.5, " pixels", Arial,"textSize")
 
+mistakeText= display.newText("mistake = " .. mistake, display.contentWidth/6, display.contentHeight/4.5, " pixels", Arial,"textSize")
+
+
 
 pointText:setTextColor(1, 0.4, 0.5)
 
@@ -49,11 +53,11 @@ pointText:setTextColor(1, 0.4, 0.5)
 
 --creating correct text object and its status
 
-	correct= display.newText("Correct!", display.contentWidth/2, display.contentHeight*2/3, nil, 50)
+	correct= display.newText(" Congratulation you won!", display.contentWidth/2, display.contentHeight*2/3, nil, 50)
 	correct:setTextColor(255/255, 255/255, 255/255)
 	correct.isVisible=false
 
-	wrongAnswer= display.newText("Wrong answer!", display.contentWidth/2, display.contentHeight*2/3, nil, 50)
+	wrongAnswer= display.newText("Game over!", display.contentWidth/2, display.contentHeight*2/3, nil, 50)
 	wrongAnswer:setTextColor(0.5,0.6,1)
 	wrongAnswer.isVisible=false
 
@@ -62,6 +66,7 @@ pointText:setTextColor(1, 0.4, 0.5)
 	numericField= native.newTextField(display.contentWidth/2, display.contentHeight/2, 100, 70)
 	numericField.inputType="number"
 --add the local function 
+ 
 		local function askMe( event )
 		-- creating 2 random number
 		randomNumber1= math.random(0, 10)
@@ -69,6 +74,8 @@ pointText:setTextColor(1, 0.4, 0.5)
 		correctAnswer = randomNumber1 + randomNumber2 
 		question.text = randomNumber1 .."+" .. randomNumber2 .. "="
 		end
+		
+
 		local function hideAnswer( )
 			correct.isVisible=false
 			wrongAnswer.isVisible=false
@@ -87,18 +94,37 @@ pointText:setTextColor(1, 0.4, 0.5)
 
 
            if(yourAnswer== correctAnswer) then
-           	correct.isVisible= true
-          	timer.performWithDelay(2000, hideAnswer)
-            point = point + 1
-            pointText.text = "point = " .. point
+          	timer.performWithDelay(1500, hideAnswer)
+           
+           point = point + 1
+           pointText.text = "point =".. point
+                     	correct.isVisible=true
+
+          elseif(point > 4) then
+
+             point=0
+
+           elseif(mistake > 2) then
+            
+                          wrongAnswer.isVisible=true
+                          mistake=0
 
             else 
-             
-           	wrongAnswer.isVisible=true
-           	--adding sound track for wrongAnswer
-             local wrongAnswerSound = audio.play(wrongAnswerSound)
+            	mistake= mistake + 1
+                  mistakeText.text = "mistake =".. mistake
+
+            
+
+               	--adding sound track for wrongAnswer
+             --local wrongAnswerSound = audio.play(wrongAnswerSound)
+
+                
             --giving the time for showing the answer
            	timer.performWithDelay(1500, hideAnswer)
+              
+
+
+
 			end
 	  	    end
         	end
