@@ -86,48 +86,32 @@ pointText:setTextColor(1, 0.4, 0.5)
             if(event.phase=="began") then
 
             elseif(event.phase=="submitted")then
+            	yourAnswer = tonumber(event.target.text)
          
-
-           	yourAnswer= tonumber(event.target.text)
-
-                  	event.target.text=""
-
+            event.target.text=''
 
            if(yourAnswer== correctAnswer) then
-          	timer.performWithDelay(1500, hideAnswer)
-           
+            
+       
            point = point + 1
-        	correct.isVisible=true
 
-          elseif(point > 4) then
-                   pointText.text = "point =".. point
+           pointText.text = "point = " ..point
 
-             point=0
 
-           elseif(mistake > 2) then
-            
-                          wrongAnswer.isVisible=true
-                          mistake=0
+           elseif(point > 4)then
 
-            else 
-            	mistake= mistake + 1
-                  mistakeText.text = "mistake =".. mistake
-
-            
+           	point=0
 
                	--adding sound track for wrongAnswer
              --local wrongAnswerSound = audio.play(wrongAnswerSound)
 
-                
-            --giving the time for showing the answer
+                         --giving the time for showing the answer
            	timer.performWithDelay(1500, hideAnswer)
               
-
-
-
 			end
 	  	    end
         	end
+
 
         
 --calling the event listener 
