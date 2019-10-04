@@ -97,10 +97,10 @@ pointText:setTextColor(1, 0.4, 0.5)
           	timer.performWithDelay(1500, hideAnswer)
            
            point = point + 1
-           pointText.text = "point =".. point
-                     	correct.isVisible=true
+        	correct.isVisible=true
 
           elseif(point > 4) then
+                   pointText.text = "point =".. point
 
              point=0
 
