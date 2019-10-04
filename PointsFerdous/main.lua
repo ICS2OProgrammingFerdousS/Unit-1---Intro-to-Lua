@@ -100,7 +100,7 @@ pointText:setTextColor(1, 0.4, 0.5)
 
            elseif(point > 4)then
 
-           	point=0
+           	point =0
 
                	--adding sound track for wrongAnswer
              --local wrongAnswerSound = audio.play(wrongAnswerSound)
