@@ -86,24 +86,23 @@ local function hideAnswer( )
 	askMe()
 end
            
-<<<<<<< HEAD
 			local function numricListener(event)
             if(event.phase=="began") then
 
             elseif(event.phase=="submitted")then
-            	yourAnswer = tonumber(event.target.text)
-         
+             yourAnswer = tonumber(event.target.text)
+
             event.target.text=''
+            askMe()
 
            if(yourAnswer== correctAnswer) then
-            
-       
-           point = point + 1
 
-           pointText.text = "point = " ..point
+                    point = point + 1
+
+                 pointText.text = "point = " ..point
 
 
-           elseif(point > 4)then
+           if(point > 4)then
 
            	point =0
 
@@ -111,41 +110,17 @@ end
              --local wrongAnswerSound = audio.play(wrongAnswerSound)
 
                          --giving the time for showing the answer
-=======
-local function numricListener(event)
-    if(event.phase=="began") then
+  
 
-    elseif(event.phase=="submitted")then
-        yourAnswer = tonumber(event.target.text)         
-        event.target.text=''
-
-        if(yourAnswer== correctAnswer) then
-			point = point + 1
-			pointText.text = "point = " ..point
-            askMe()
-             
-        	if(point > 4)then
-            correct.isVisible=true
-            point = 0
-              askMe()
-
-         else  
-        	mistake = mistake + 1
-          	mistakeText.text = "mistake = " .. mistake
-          	askMe()
 
             --adding sound track for wrongAnswer
             --local wrongAnswerSound = audio.play(wrongAnswerSound)
 
             --giving the time for showing the answer
->>>>>>> f7200592b3b2dc4fdd63635e084791e5efec3558
-           	timer.performWithDelay(1500, hideAnswer)
-              
-		end
-	end
-end
-end
-
+       end      
+	   	end
+	   end
+    end
 ----------------------------------------------
 -- EVENT LISTENERS
 ---------------------------------------------
@@ -156,5 +131,5 @@ numericField:addEventListener("userInput", numricListener)
 -- START THE GAME
 --------------------------------------------
 --call the function for asking another question
-askMe()
+       askMe()
 
