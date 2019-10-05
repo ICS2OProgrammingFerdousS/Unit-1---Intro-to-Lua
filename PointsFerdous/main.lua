@@ -33,8 +33,7 @@ local yourAnswer
 local correctAnswer
 local wrongAnswer
 local point=0
-local textSize=90
-local mistake=0
+local textSize=9
 
 --local wrongAnswerSound = audio.loadSound("Sound/Wrong Buzzer.mp3")
 
@@ -49,7 +48,7 @@ question:setTextColor(1, 0.7, 1)
 pointText= display.newText("point = " .. point, display.contentWidth/1.1, display.contentHeight/4.5, " pixels", Arial,"textSize")
 pointText:setTextColor(1, 0.4, 0.5)
 
-mistakeText= display.newText("mistake = " .. mistake, display.contentWidth/6, display.contentHeight/4.5, " pixels", Arial,"textSize")
+--mistakeText= display.newText("mistake = " .. mistake, display.contentWidth/6, display.contentHeight/4.5, " pixels", Arial,"textSize")
 
 --pointText=50
 
@@ -94,23 +93,17 @@ end
 
             event.target.text=''
             askMe()
+           pointText.text = "point = " ..point
 
-           if(yourAnswer== correctAnswer) then
+           if(yourAnswer == correctAnswer) then
+          point = point + 1
 
-                    point = point + 1
-
-                 pointText.text = "point = " ..point
-
-
-           if(point > 4)then
-
-           	point =0
 
                	--adding sound track for wrongAnswer
              --local wrongAnswerSound = audio.play(wrongAnswerSound)
 
                          --giving the time for showing the answer
-  
+   
 
 
             --adding sound track for wrongAnswer
@@ -120,8 +113,8 @@ end
        end      
 	   	end
 	   end
-    end
-----------------------------------------------
+
+---------------------------------------------
 -- EVENT LISTENERS
 ---------------------------------------------
 --calling the event listener 
