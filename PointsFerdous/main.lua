@@ -16,7 +16,7 @@
 -- Calculation game
 
 -----------------------------------------------------------------------------------------
-
+  
 -- Your code here
 -- hide setStatusBar
 display.setStatusBar(display.HiddenStatusBar)
@@ -40,12 +40,24 @@ local correctAnswer
 local wrongAnswer
 local point=0
 local mistake =0
-
+local youWin 
+local youLose
 --local wrongAnswerSound = audio.loadSound("Sound/Wrong Buzzer.mp3")
 
 -------------------------------------------------
 -- OBJECT CREATION
 --------------------------------------------------
+
+local youWin = display.newImageRect("Images/you-win.jpg", 200, 200)
+local youLose = display.newImageRect("Images/game over.png", 200, 200)
+youWin.x = 500
+youWin.y = 600
+youLose.x = 500
+youLose.y = 600
+
+youWin.isVisible=false
+youLose.isVisible = false
+
 
 --display question and set color
 question= display.newText("", display.contentWidth/3, display.contentHeight/2, nil, 50)
@@ -56,7 +68,6 @@ pointText:setTextColor(1, 0.4, 0.5)
 
 mistakeText= display.newText("mistake = " .. mistake, display.contentWidth/6, display.contentHeight/4.5,  Arial, 35)
 
---pointText=50
 
 --creating correct text object and its status
 
@@ -99,33 +110,35 @@ local function numricListener(event)
 
     event.target.text = ""
     
-
+    -- if the Answer get it right give them a point
     if(yourAnswer == correctAnswer) then
       point = point + 1
       pointText.text = "Point = " .. point
+      correct.isVisible = true
       timer.performWithDelay(1500, HideText)
 
+      -- if they more than 5 points display you win
       if ( point > 4) then
         -- display you win image
-      correct.isVisible = true
-      point = 0
-      
-      else 
+        youWin.isVisible= true
+        
+        point = 0
+      end
+
+    -- otherwise they get it wrong count the mistakes  
+    else 
         mistake = mistake + 1
-        mistakeText.text = "mistake =" .. mistake
-        timer.performWithDelay(1500, HideText)
-      if(mistake > 3)then
+        mistakeText.text = "mistake = " .. mistake
         wrongAnswer.isVisible = true
+        timer.performWithDelay(1500, HideText)
+    end
+      if(mistake > 3)then
+      youLose.isVisible= true
         mistake = 0
 
-
-             
-   
+      end
     end      
-	 end
   end
- end
-end
 
 ---------------------------------------------
 -- EVENT LISTENERS

@@ -74,8 +74,8 @@ numericField.inputType="number"
 local function askMe()
 		randomOpreator = math.random(1, 2)
 		-- creating 2 random number
-		randomNumber1= math.random(1, 20)
-		randomNumber2= math.random(1, 20)
+		randomNumber1= math.random(1, 10)
+		randomNumber2= math.random(1, 10)
 		correctAnswer = randomNumber1 + randomNumber2 
 		question.text = randomNumber1 .. "+" .. randomNumber2 .. "="
         end
@@ -88,22 +88,22 @@ local function hideAnswer( )
 local function numrictListener( event )
 		
         if(event.phase=="began") then
-        elseif(event.phase=="submitted")then
+        elseif(event.phase=="submitted") then
             	yourAnswer= tonumber(event.target.text)
             	event.target.text = ""
         if(randomOpreator == 1)then
                correctAnswer = randomNumber1 + randomNumber2 
                question.text = randomNumber1 .. "+" .. randomNumber2 .. "="
         askMe()
-        elseif(randomOpreator== 2)then
-              correctAnswer = randomNumber1 - randomNumber2 
+          elseif(randomOpreator== 2) then
+               correctAnswer = randomNumber1 - randomNumber2 
             question.text = randomNumber1 .. "-" .. randomNumber2 .. "="
          askMe()
-         elseif(randomOpreator == 3)then
+         elseif(randomOpreator == 3) then
             	correctAnswer = randomNumber1 * randomNumber2
             	question.text = randomNumber1 .. " * " .. randomNumber2 .. "="
              askMe()
-         elseif(randomOpreator == 3)then
+         elseif(randomOpreator == 3) then
             	correctAnswer = randomNumber1 / randomNumber2
             	question.text = randomNumber1 .. " / " .. randomNumber2 .. "="
              askMe()
