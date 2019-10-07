@@ -15,90 +15,122 @@
 
 
 
+--------------------------------------------------
+--hide the setStatusBar
+--------------------------------------------------
 
 
--------------------------------------------------------
---local  variables
--------------------------------------------------------
-local randomOpreator
-local yourAnswer
-local numericField
-local randomNumber1
-local randomNumber2
-local question
-local correctAnswer
-
-------------------------------
---background color
-------------------------------
+display.setStatusBar(display.HiddenStatusBar)
+--------------------------------------------------------------
+-- adding background color
+--------------------------------------------------------------
 display.setDefault("background", 0, 0, 0.2)
 
+---------------------------------------------------------------
+--local variables
+---------------------------------------------------------------
+
+
 --creating the variables
+local question
+local correct
+local numericField
+local randomOpreator
+local randomNumber1
+local randomNumber2
+local yourAnswer
+local correctAnswer
+local wrongAnswer
+local wrongAnswerSound = audio.loadSound("Sound/Wrong Buzzer.mp3")
 
 --display question and set color
+ -----------------------------------------------------------------
+ --object creation---
+ ---------------------------------------------------------------------
+question= display.newText("", display.contentWidth/3, display.contentHeight/2, nil, 50)
 
-	question= display.newText("", display.contentWidth/3, display.contentHeight/2, nil, 50)
-
-	question:setTextColor(1, 0.7, 1)
+question:setTextColor(1, 0.7, 1)
 
 
 --creating correct text object and its status
 
-	correct= display.newText("Correct!", display.contentWidth/2, display.contentHeight*2/3, nil, 50)
-	correct:setTextColor(255/255, 255/255, 255/255)
-	correct.isVisible=false
+correct= display.newText("Correct!", display.contentWidth/2, display.contentHeight*2/3, nil, 50)
+correct:setTextColor(255/255, 255/255, 255/255)
+correct.isVisible=false
 
-	wrongAnswer= display.newText("Wrong answer!", display.contentWidth/2, display.contentHeight*2/3, nil, 50)
-	wrongAnswer:setTextColor(1, 0.4, 0.5)
-	wrongAnswer.isVisible=false
+wrongAnswer= display.newText("Wrong answer!", display.contentWidth/2, display.contentHeight*2/3, nil, 50)
+wrongAnswer:setTextColor(1, 0.4, 0.5)
+wrongAnswer.isVisible=false
 
 
 --creating numeric field
-	numericField= native.newTextField(display.contentWidth/2, display.contentHeight/2, 100, 70)
-	numericField.inputType="number"
+numericField= native.newTextField(display.contentWidth/2, display.contentHeight/2, 100, 70)
+numericField.inputType="number"
 --add the local function 
+-------------------------------------------------------------------------------
+--local functions
+-------------------------------------------------------------------------------
 
-        
-  	
-
-	local function hideText()
-		correct.isVisible =false
-		wrongAnswer.isVisible=false
-		end
-
-
-	
-local function  numricListener(event)
-  randomOpreator = math.random(1, 3)
-	randomNumber1 = math.random(1, 20)
-	randomNumber2 = math.random(1, 25)
-
-      -- if(event.phase=="began") then
-      --    elseif(event.phase=="submitted")then
-         --	yourAnswer= tonumber(event.target.text)
-         	--  	event.target.text=""
-         
-        if(randomOpreator == 1)then
-       	correctAnswer = randomNumber + randomNumber2
-
-           question.text = randomNumber1 .."+" .. randomNumber2 .. "="
-         if(yourAnswer == correctAnswer)  then
-
-           correct.isVisible = true
-
-      elseif(randomOpreator == 2)then
-      	correctAnswer = randomNumber1 - randomNumber2
-       question.text = randomNumber1 .."-" .. randomNumber2 .. "="
-          elseif(randomOpreator== 3) then
-          	correctAnswer = randomNumber1 *randomNumber2
-       question.text = randomNumber1 .."*" .. randomNumber2 .. "="
-        timer.performWithDelay(1000, hideText)
+local function askMe()
+		randomOpreator = math.random(1, 2)
+		-- creating 2 random number
+		randomNumber1= math.random(1, 20)
+		randomNumber2= math.random(1, 20)
+		correctAnswer = randomNumber1 + randomNumber2 
+		question.text = randomNumber1 .. "+" .. randomNumber2 .. "="
         end
+local function hideAnswer( )
+			correct.isVisible=false
+			wrongAnswer.isVisible=false
+			askMe()
+		end
+           
+local function numrictListener( event )
+		
+        if(event.phase=="began") then
+        elseif(event.phase=="submitted")then
+            	yourAnswer= tonumber(event.target.text)
+            	event.target.text = ""
+        if(randomOpreator == 1)then
+               correctAnswer = randomNumber1 + randomNumber2 
+               question.text = randomNumber1 .. "+" .. randomNumber2 .. "="
+        askMe()
+        elseif(randomOpreator== 2)then
+              correctAnswer = randomNumber1 - randomNumber2 
+            question.text = randomNumber1 .. "-" .. randomNumber2 .. "="
+         askMe()
+         elseif(randomOpreator == 3)then
+            	correctAnswer = randomNumber1 * randomNumber2
+            	question.text = randomNumber1 .. " * " .. randomNumber2 .. "="
+             askMe()
+         elseif(randomOpreator == 3)then
+            	correctAnswer = randomNumber1 / randomNumber2
+            	question.text = randomNumber1 .. " / " .. randomNumber2 .. "="
+             askMe()
+
+		           	timer.performWithDelay(1500, hideAnswer)
+
+
+		   end
+		  end
+        end
+       
 
 		
-	   end  
-      end
+---------------------------------------------------------------------
+--add evenet listener
+----------------------------------------------------------------------        
+			numericField:addEventListener("userInput", numrictListener)
 
+----------------------------------------------------------------------
+--start the game
+----------------------------------------------------------------------
+
+askMe()
+
+
+
+   
     
    
      
@@ -107,9 +139,4 @@ local function  numricListener(event)
 
 		
            
-
-			numericField:addEventListener("userInput", numricListener)
---calling the event listener 
---call the function for asking another question
-
 

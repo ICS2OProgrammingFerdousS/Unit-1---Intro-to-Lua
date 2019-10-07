@@ -4,7 +4,7 @@
 -- Name: Ferdous S
 -- Course: ICS2O
 --playing math gasme-- 
-main.lua
+--main.lua
 --
 -----------------------------------------------------------------------------------------
 -- Your code here
@@ -37,7 +37,6 @@ local yourAnswer
 local correctAnswer
 local wrongAnswer
 local point=0
-local textSize=9
 
 --local wrongAnswerSound = audio.loadSound("Sound/Wrong Buzzer.mp3")
 
@@ -49,7 +48,7 @@ local textSize=9
 question= display.newText("", display.contentWidth/3, display.contentHeight/2, nil, 50)
 question:setTextColor(1, 0.7, 1)
 
-pointText= display.newText("point = " .. point, display.contentWidth/1.1, display.contentHeight/4.5, " pixels", Arial,"textSize")
+pointText= display.newText("Point = " .. point, display.contentWidth/1.1, display.contentHeight/4.5, " pixels", Arial,"textSize")
 pointText:setTextColor(1, 0.4, 0.5)
 
 --mistakeText= display.newText("mistake = " .. mistake, display.contentWidth/6, display.contentHeight/4.5, " pixels", Arial,"textSize")
@@ -77,8 +76,8 @@ numericField.inputType="number"
  
 local function askMe( event )
 	-- creating 2 random number
-	randomNumber1= math.random(0, 10)
-	randomNumber2= math.random(0, 10)
+	randomNumber1= math.random(1, 10)
+	randomNumber2= math.random(1, 10)
 	correctAnswer = randomNumber1 + randomNumber2 
 	question.text = randomNumber1 .."+" .. randomNumber2 .. "="
 end
@@ -97,23 +96,15 @@ end
 
             event.target.text=''
             askMe()
-           pointText.text = "point = " ..point
 
-           if(yourAnswer == correctAnswer) then
-          point = point + 1
+            if(yourAnswer == correctAnswer) then
+             point = point + 1
+            pointText.text = "Point = " .. point
 
+                correct.isVisible = true
+  askMe()
 
-               	--adding sound track for wrongAnswer
-             --local wrongAnswerSound = audio.play(wrongAnswerSound)
-
-                         --giving the time for showing the answer
-   
-
-
-            --adding sound track for wrongAnswer
-            --local wrongAnswerSound = audio.play(wrongAnswerSound)
-
-            --giving the time for showing the answer
+             
        end      
 	   	end
 	   end

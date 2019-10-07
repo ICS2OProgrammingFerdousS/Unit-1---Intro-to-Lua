@@ -62,7 +62,7 @@ display.setDefault("background", 0, 0, 0.2)
 			local function numricListener(event)
             if(event.phase=="began") then
 
-            elseif(event.phase=="submitted")then
+            elseif(event.phase=="submitted")then 
          
 
            	yourAnswer= tonumber(event.target.text)
