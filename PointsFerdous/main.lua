@@ -118,7 +118,7 @@ local function numricListener(event)
       timer.performWithDelay(1500, HideText)
 
       -- if they more than 5 points display you win
-      if ( point > 4) then
+      if ( point == 4) then
         -- display you win image
         youWin.isVisible= true
         
@@ -134,6 +134,8 @@ local function numricListener(event)
     end
       if(mistake > 3)then
       youLose.isVisible= true
+      timer.performWithDelay(1500, HideText)
+
         mistake = 0
 
       end
