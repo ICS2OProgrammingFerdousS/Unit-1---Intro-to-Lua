@@ -15,12 +15,37 @@ display.setDefault("background", 0, 0, 0.2)
 -- LOCAL VARIABLES
 -------------------------------------------------
 
---creating the variables
+--creating the varia
+
+--------------------------------------------------------------------
+--variables for timer
+---------------------------------------------------------------------
+local totalSeconds = 5
+local secondsLeft = 5
+local clockText
+local countDownTimer
+local lives = 3
+local heart1 
+local heart2
+---creating the variables---------------------------------------------------
+--creating lives display
+---------------------------------------------------------------------------
+heart1 = display.newImageRect("Images/download.png", 100, 100 )
+heart1.x = 950
+heart1.y = 75
+
+heart2 = display.newImageRect("Images/download.png", 100, 100)
+heart2.x = 850
+heart2.y = 75
+
+-------------------------------------------------------------------------------
 local question
 local correct
+
 local numericField
 local randomNumber1
 local randomNumber2
+
 local yourAnswer
 local correctAnswer
 local wrongAnswer
@@ -28,17 +53,12 @@ local point=0
 local mistake =0
 local youWin 
 local youLose
-local randomOpreator
-
-
---------------------------------------------------------------------
---variables for 
----------------------------------------------------------------------
+--local wrongAnswerSound = audio.loadSound("Sound/Wrong Buzzer.mp3")
 
 -------------------------------------------------
 -- OBJECT CREATION
 --------------------------------------------------
--- inseting the images and make their sizes
+
 local youWin = display.newImageRect("Images/you-win.jpg", 200, 200)
 local youLose = display.newImageRect("Images/game over.png", 200, 200)
 youWin.x = 500
@@ -78,37 +98,38 @@ numericField.inputType="number"
 ------------------------------------------------
 -- LOCAL FUNCTIONS
 ---------------------------------------------------
- 
-local function askMe( )
-    randomOpreator = math.random(1, 4)
-    -- creating 2 random number
-    randomNumber1= math.random(1, 10)
-    randomNumber2= math.random(1, 10)
+local function UpdateTime( ... )
+	secondsLeft = secondsLeft - 1
+	clockText.text = secondsLeft .. ""
+	if(secondsLeft == 0)then
+		secondsLeft = totalSeconds
+		lives = lives - 1
+		if(lives == 2)then
+			heart2.isVisible = false
+		elseif(lives == 1)then
+         heart1.isVisible = false
 
-    if(randomOpreator == 1)then
-               correctAnswer = randomNumber1 + randomNumber2 
-               question.text = randomNumber1 .. "+" .. randomNumber2 .. "="
-    elseif(randomOpreator== 2) then
-               correctAnswer = randomNumber1 - randomNumber2 
-                question.text = randomNumber1 .. "-" .. randomNumber2 .. "="
-       if(randomNumber1 < randomNumber2) then
-       question.text = randomNumber2 .. " * " .. randomNumber1 .. "="
-  
-    elseif(randomOpreator == 3) then
-                correctAnswer = randomNumber1 * randomNumber2
-                question.text = randomNumber1 .. " * " .. randomNumber2 .. "="
-    elseif(randomOpreator == 4) then
-                correctAnswer = randomNumber1 / randomNumber2
-                question.text = randomNumber1 .. " / " .. randomNumber2 .. "="
-     end
-
+            
   end
  end
-        
+end
+local  function statTimer( ... )
+	countDownTimer = timer.performWithDelay(100, UpdateTime, 0)
+	-- body
+ end
+
+local function askMe( )
+	-- creating 2 random number
+	randomNumber1= math.random(1, 10)
+	randomNumber2= math.random(1, 10)
+	correctAnswer = randomNumber1 + randomNumber2 
+	question.text = randomNumber1 .."+" .. randomNumber2 .. "="
+end
+		
 local function HideText( )
-    correct.isVisible=false
-    wrongAnswer.isVisible=false
-    askMe()
+	correct.isVisible=false
+	wrongAnswer.isVisible=false
+	askMe()
 end
            
 local function numricListener(event)
@@ -133,20 +154,32 @@ local function numricListener(event)
         
         point = 0
       end
-    
+
     -- otherwise they get it wrong count the mistakes  
     else 
         mistake = mistake + 1
         mistakeText.text = "mistake = " .. mistake
         wrongAnswer.isVisible = true
         timer.performWithDelay(1500, HideText)
-      end
+    end
       if(mistake > 3)then
       youLose.isVisible= true
       timer.performWithDelay(1500, HideText)
+
         mistake = 0
 
       end
     end      
-   end
-   
+  end
+
+---------------------------------------------
+-- EVENT LISTENERS
+---------------------------------------------
+--calling the event listener 
+numericField:addEventListener("userInput", numricListener)
+
+---------------------------------------------
+-- START THE GAME
+--------------------------------------------
+--call the function for asking another question
+askMe()
