@@ -22,6 +22,8 @@ local correct
 local numericField
 local randomNumber1
 local randomNumber2
+local randomNumber3
+local randomNumber4
 local yourAnswer
 local correctAnswer
 local wrongAnswer
@@ -78,8 +80,10 @@ numericField.inputType="number"
 local function askMe( )
     randomOpreator = math.random(1, 4)
     -- creating 2 random number
-    randomNumber1= math.random(1, 10)
-    randomNumber2= math.random(1, 10)
+    randomNumber1= math.random(1, 100)
+    randomNumber2= math.random(1, 100)
+    randomNumber3=math.random(1,10)
+    randomNumber4=math.random(1, 10 )
 
     if(randomOpreator == 1)then
                correctAnswer = randomNumber1 + randomNumber2 
@@ -94,8 +98,8 @@ local function askMe( )
                 correctAnswer = randomNumber1 * randomNumber2
                 question.text = randomNumber1 .. " * " .. randomNumber2 .. "="
     elseif(randomOpreator == 4) then
-                correctAnswer = randomNumber1 / randomNumber2
-                question.text = randomNumber1 .. " / " .. randomNumber2 .. "="
+                correctAnswer = randomNumber3 / randomNumber4
+                question.text = randomNumber3 .. " / " .. randomNumber4 .. "="
      end
 
   end
@@ -140,6 +144,7 @@ local function numricListener(event)
       if(mistake > 3)then
       youLose.isVisible= true
       timer.performWithDelay(1500, HideText)
+      youLose.isVisible=false
         mistake = 0
 
       end

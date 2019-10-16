@@ -20,8 +20,8 @@ display.setDefault("background", 0, 0, 0.2)
 --------------------------------------------------------------------
 --variables for timer
 ---------------------------------------------------------------------
-local totalSeconds = 5
-local secondsLeft = 5
+local totalSeconds = 10
+local secondsLeft = 10
 local clockText
 local countDownTimer
 local lives = 3
@@ -30,15 +30,30 @@ local heart2
 ---creating the variables---------------------------------------------------
 --creating lives display
 ---------------------------------------------------------------------------
-heart1 = display.newImageRect("Images/download.png", 100, 100 )
+heart1 = display.newImageRect("Images/heart.png", 100, 100 )
 heart1.x = 950
 heart1.y = 75
 
-heart2 = display.newImageRect("Images/download.png", 100, 100)
+heart2 = display.newImageRect("Images/heart.png", 100, 100)
 heart2.x = 850
 heart2.y = 75
 
+heart3 = display.newImageRect("Images/heart.png", 100, 100)
+heart3.x = 760
+heart3.y = 75
+
+heart4 = display.newImageRect("Images/heart.png", 100, 100)
+heart4.x=660
+heart4.y=75
 -------------------------------------------------------------------------------
+
+--local wrongAnswerSound = audio.loadSound("Sound/Wrong Buzzer.mp3")
+
+-------------------------------------------------
+-- OBJECT CREATION
+--------------------------------------------------
+
+
 local question
 local correct
 
@@ -49,10 +64,10 @@ local randomNumber2
 local yourAnswer
 local correctAnswer
 local wrongAnswer
-local point=0
 local mistake =0
 local youWin 
 local youLose
+local secondsLeftText
 --local wrongAnswerSound = audio.loadSound("Sound/Wrong Buzzer.mp3")
 
 -------------------------------------------------
@@ -74,10 +89,8 @@ youLose.isVisible = false
 question= display.newText("", display.contentWidth/3, display.contentHeight/2, nil, 50)
 question:setTextColor(1, 0.7, 1)
 
-pointText= display.newText("Point = " .. point, display.contentWidth/1.1, display.contentHeight/4.5, Arial, 35)
-pointText:setTextColor(1, 0.4, 0.5)
 
-mistakeText= display.newText("mistake = " .. mistake, display.contentWidth/6, display.contentHeight/4.5,  Arial, 35)
+secondsLeftText= display.newText(secondsLeft, display.contentWidth/7, display.contentHeight/7, nil, 50)
 
 
 --creating correct text object and its status
@@ -95,41 +108,31 @@ wrongAnswer.isVisible=false
 numericField= native.newTextField(display.contentWidth/2, display.contentHeight/2, 100, 70)
 numericField.inputType="number"
 
+
 ------------------------------------------------
 -- LOCAL FUNCTIONS
 ---------------------------------------------------
-local function UpdateTime( ... )
-	secondsLeft = secondsLeft - 1
-	clockText.text = secondsLeft .. ""
-	if(secondsLeft == 0)then
-		secondsLeft = totalSeconds
-		lives = lives - 1
-		if(lives == 2)then
-			heart2.isVisible = false
-		elseif(lives == 1)then
-         heart1.isVisible = false
 
-            
-  end
- end
-end
-local  function statTimer( ... )
-	countDownTimer = timer.performWithDelay(100, UpdateTime, 0)
-	-- body
- end
 
+
+
+
+
+
+
+ 
 local function askMe( )
-	-- creating 2 random number
-	randomNumber1= math.random(1, 10)
-	randomNumber2= math.random(1, 10)
-	correctAnswer = randomNumber1 + randomNumber2 
-	question.text = randomNumber1 .."+" .. randomNumber2 .. "="
+  -- creating 2 random number
+  randomNumber1= math.random(1, 10)
+  randomNumber2= math.random(1, 10)
+  correctAnswer = randomNumber1 + randomNumber2 
+  question.text = randomNumber1 .."+" .. randomNumber2 .. "="
 end
-		
+    
 local function HideText( )
-	correct.isVisible=false
-	wrongAnswer.isVisible=false
-	askMe()
+  correct.isVisible=false
+  wrongAnswer.isVisible=false
+  askMe()
 end
            
 local function numricListener(event)
@@ -142,9 +145,6 @@ local function numricListener(event)
     
     -- if the Answer get it right give them a point
     if(yourAnswer == correctAnswer) then
-      point = point + 1
-      pointText.text = "Point = " .. point
-      correct.isVisible = true
       timer.performWithDelay(1500, HideText)
 
       -- if they more than 5 points display you win
@@ -157,18 +157,10 @@ local function numricListener(event)
 
     -- otherwise they get it wrong count the mistakes  
     else 
-        mistake = mistake + 1
-        mistakeText.text = "mistake = " .. mistake
         wrongAnswer.isVisible = true
         timer.performWithDelay(1500, HideText)
     end
-      if(mistake > 3)then
-      youLose.isVisible= true
-      timer.performWithDelay(1500, HideText)
-
-        mistake = 0
-
-      end
+     
     end      
   end
 
@@ -183,3 +175,35 @@ numericField:addEventListener("userInput", numricListener)
 --------------------------------------------
 --call the function for asking another question
 askMe()
+
+
+local function UpdateTime( ... )
+  secondsLeft = secondsLeft - 1
+  clockText.text = secondsLeft .. ""
+  if(secondsLeft == 0)then
+    secondsLeft = totalSeconds
+    lives = lives - 1
+  if(lives == 2)then
+      heart2.isVisible = false
+  elseif(lives == 1)then
+         heart1.isVisible = false
+
+            
+  end
+ end
+end
+local  function statTimer( )
+  countDownTimer = timer.performWithDelay(100, UpdateTime, 0)
+  
+end
+
+
+---------------------------------------------
+-- EVENT LISTENERS
+---------------------------------------------
+--calling the event listener 
+
+---------------------------------------------
+-- START THE GAME
+--------------------------------------------
+--call the function for asking another question
