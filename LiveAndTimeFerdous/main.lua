@@ -24,12 +24,12 @@
     local secondsLeft = 10
     local clockText
     local countDownTimer
-    local lives = 3
+    local lives = 4
     local heart1 
     local heart2
-    local point=0
-
-
+    local point = 0
+    local backgroundMusic= audio.loadStream("Sound/whack.mp3.mp3")
+    local musicChannel
 
     --local wrongAnswerSound = audio.loadSound("Sound/Wrong Buzzer.mp3")
 
@@ -52,12 +52,14 @@
     local youWin 
     local youLose
     local secondsLeftText
+    local wrongSound = audio.loadSound("Sounds/Wrong Buzzer.mp3")
+
     --local wrongAnswerSound = audio.loadSound("Sound/Wrong Buzzer.mp3")
 
     -------------------------------------------------
     -- OBJECT CREATION
     --------------------------------------------------
-
+     
       youWin = display.newImageRect("Images/you-win.jpg", 200, 200)
       youLose = display.newImageRect("Images/game over.png", 200, 200)
       youWin.x = 500
@@ -119,6 +121,8 @@
 ---------------------------------------------------
 
     local function askMe( )
+    local musicChannel = audio.play(backgroundMusic, {loops= -1})
+
         -- creating 2 random number
         randomNumber1= math.random(1, 10)
         randomNumber2= math.random(1, 10)
@@ -138,20 +142,17 @@
         if(secondsLeft == 0)then
           secondsLeft = totalSeconds
           lives = lives - 1
-        if(lives == 4)then
-            heart4.isVisible = false
-        elseif(lives == 3)then
-             heart3.isVisible = false
-        elseif(lives== 2)then
-            heart2.isVisible=false
-        elseif(lives==1)then
+        
+        elseif(lives < 1)then
           heart1.isVisible=false
-                  
+          youWin.isVisible=true
+
         end
        end
-      end
+      
                
     local function numricListener(event)
+
       if(event.phase=="began") then
 
       elseif(event.phase=="submitted")then
@@ -163,34 +164,53 @@
         if(yourAnswer == correctAnswer) then
            point = point + 1
       pointText.text = "Point = " .. point
+         secondsLeft = totalSeconds
+
           timer.performWithDelay(1500, HideText)
 
           -- if they more than 5 points display you win
-          if ( point == 4) then
+          if ( point > 4) then
             -- display you win image
             youWin.isVisible= true
-            
+
             point = 0
           end
 
         -- otherwise they get it wrong count the mistakes  
         else 
-     if(lives == 4)then
-            heart4.isVisible = false
-       elseif(lives == 3)then
-             heart3.isVisible = false
-        elseif(lives== 2)then
-            heart2.isVisible=false
-        elseif(lives==1)then
-          heart1.isVisible=fal        wrongAnswer.isVisible = true
-            timer.performWithDelay(1500, HideText)
-         end
+      lives = lives - 1
+
+     if(lives == 3)then
+       local wrongSound = audio.play(wrongSound)
+        heart4.isVisible = false
+        askMe()
+
+      elseif(lives == 2)then
+        heart3.isVisible = false
+        secondsLeft=totalSeconds
+        askMe()
+
+      elseif(lives== 1)then
+        heart2.isVisible=false
+        askMe()
+
+      elseif(lives==0)then
+        heart1.isVisible=false  
+        wrongAnswer.isVisible = true
+        timer.performWithDelay(1500, HideText)
+        
+        if(lives < 1)then
+          youLose.isVisible=true
+
         end      
       end
      end
+    end
+   end
 
     local  function startTimer( )
       countDownTimer = timer.performWithDelay(1000, UpdateTime, 0)
+
       
     end
 
