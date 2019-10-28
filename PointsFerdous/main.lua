@@ -16,7 +16,7 @@
 -- Calculation game
 
 -----------------------------------------------------------------------------------------
-
+  
 -- Your code here
 -- hide setStatusBar
 display.setStatusBar(display.HiddenStatusBar)
@@ -68,7 +68,6 @@ pointText:setTextColor(1, 0.4, 0.5)
 
 mistakeText= display.newText("mistake = " .. mistake, display.contentWidth/6, display.contentHeight/4.5,  Arial, 35)
 
---pointText=50
 
 --creating correct text object and its status
 
@@ -113,7 +112,7 @@ local function numricListener(event)
 
     event.target.text = ""
     
-
+    -- if the Answer get it right give them a point
     if(yourAnswer == correctAnswer) then
       point = point + 1
             correct.isVisible = true
@@ -121,9 +120,11 @@ local function numricListener(event)
        CorrectSoundCehnnel = audio.play(CorrectSound)
 
       pointText.text = "Point = " .. point
+      correct.isVisible = true
       timer.performWithDelay(1500, HideText)
 
-      if ( point > 4) then
+      -- if they more than 5 points display you win
+      if ( point == 4) then
         -- display you win image
       youWin.isVisible = true
       point= 0
@@ -137,16 +138,16 @@ local function numricListener(event)
 
         mistakeText.text = "mistake =" .. mistake
         timer.performWithDelay(1500, HideText)
+    end
       if(mistake > 3)then
         youLost.isVisible = true
         mistake = 0
         timer.performWithDelay(1500, HideText)
 
+        mistake = 0
 
-             
-   
+      end
     end      
-	 end
   end
  end
 

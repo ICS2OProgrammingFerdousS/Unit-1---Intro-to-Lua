@@ -24,10 +24,14 @@
 			-----------------------------------------------------------------------
 			--objects creations
 			---------------------------------------------------------------------------
+			local park=display.newImageRect("Images/road.png", 2048, 1736)
+		    park.y=-100
 
-          local backgroundMusic = audio.loadStream("Sounds/whack.mp3")
-           local msicChannel
-		    local ball=display.newImageRect("Images/football.png", 40, 40)
+		    physics.addBody(park, "static", {friction=0.4, bounce= 0.4})
+		    local grass = display.newImageRect("Images/grass.png", 1020, 700)
+		    grass.x=500
+		    grass.y=700
+		     local ball=display.newImageRect("Images/football.png", 40, 40)
 		    ball.x=10
 		    ball.y=0
 		    local ball2=display.newImageRect("Images/football.png", 40, 40)
