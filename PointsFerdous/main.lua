@@ -40,6 +40,12 @@ local correctAnswer
 local wrongAnswer
 local point=0
 local mistake =0
+local CorrectSound = audio.loadSound("Sounds/CorrectSound.mp3")
+local wrongSound = audio.loadSound("Sounds/wrongSound.mp3")
+local CorrectSoundCehnnel
+local wrongChennel
+local youWin
+local youLost
 
 --local wrongAnswerSound = audio.loadSound("Sound/Wrong Buzzer.mp3")
 
@@ -47,7 +53,13 @@ local mistake =0
 -- OBJECT CREATION
 --------------------------------------------------
 
+
 --display question and set color
+youWin =display.newText("You win ",display.contentWidth/2, display.contentHeight*2/3, nil, 50)
+  youWin.isVisible= false
+youLost = display.newText("You lost ",display.contentWidth/2, display.contentHeight*2/3, nil, 50)
+youLost.isVisible=false
+
 question= display.newText("", display.contentWidth/3, display.contentHeight/2, nil, 50)
 question:setTextColor(1, 0.7, 1)
 
@@ -88,6 +100,8 @@ end
 local function HideText( )
 	correct.isVisible=false
 	wrongAnswer.isVisible=false
+  youWin.isVisible=false
+  youLost.isVisible=false
 	askMe()
 end
            
@@ -102,21 +116,31 @@ local function numricListener(event)
 
     if(yourAnswer == correctAnswer) then
       point = point + 1
+            correct.isVisible = true
+
+       CorrectSoundCehnnel = audio.play(CorrectSound)
+
       pointText.text = "Point = " .. point
       timer.performWithDelay(1500, HideText)
 
       if ( point > 4) then
         -- display you win image
-      correct.isVisible = true
-      point = 0
+      youWin.isVisible = true
+      point= 0
+      timer.performWithDelay(100, HideText)
       
+      end
       else 
         mistake = mistake + 1
+        wrongAnswer.isVisible = true
+        wrongChennel = audio.play(wrongSound)
+
         mistakeText.text = "mistake =" .. mistake
         timer.performWithDelay(1500, HideText)
       if(mistake > 3)then
-        wrongAnswer.isVisible = true
+        youLost.isVisible = true
         mistake = 0
+        timer.performWithDelay(1500, HideText)
 
 
              
@@ -125,7 +149,7 @@ local function numricListener(event)
 	 end
   end
  end
-end
+
 
 ---------------------------------------------
 -- EVENT LISTENERS

@@ -4,6 +4,13 @@
 --
 -----------------------------------------------------------------------------------------
 
+-------------------------------------------------------------
+--sound variables
+-------------------------------------------------------------
+
+local touchSound = audio.loadSound("Sounds/Button.mp3")
+local  buttonChennal
+
 -- Your code here
 -- hidden the statusbar
 display.setStatusBar(display.HiddenStatusBar)
@@ -48,6 +55,7 @@ local  function blueListener( touch )
 	end
 
 	if ((touch.phase == "moved") and (alreadyTouchedBlueGirl==true))then
+	 buttonChennal = audio.play(touchSound)
 
 		blueGirl.x = touch.x
 
@@ -55,6 +63,7 @@ local  function blueListener( touch )
 	end
 
 	if(touch.phase == "ended") then
+
 		alreadyTouchedBlueGirl= false
 
 		alreadyTouchedYellowGirl= false
@@ -76,7 +85,6 @@ local function yellow( touch )
 end
 
         if((touch.phase == "moved") and (alreadyTouchedYellowGirl== true)) then
-
         	yellowGirl.x = touch.x
 
         	yellowGirl.y= touch.y

@@ -3,10 +3,20 @@
 -- Name: Ferdous S
 -- Course: ICS2O
 -- This displays an image to move
---
+----------------------------------------------------------------------------
+--HiddenStatusBar
+------------------------------------------------------------------------------
+display.setStatusBar(display.HiddenStatusBar)
+---------------------------------------------------------------------------
+--------------------------------------------------------------------------
+--move sound variables
+--------------------------------------------------------------------------
+
+local moveSound = audio.loadSound("Sound/muscle.mp3")
+local movesSoundChennel 
 ---------------------------------------------------------------------------------------------------------------------------
 --make a global variable
-scrollSpeed = 6
+scrollSpeed = 2
 --bacground image with width and height
 local  bacgroundImage = display.newImageRect("Images/background.png", 2048, 1536)
 -------------------------------------
@@ -28,14 +38,16 @@ beetleship.y = display.contentHeight/3
 --function for moving image
 local function moveShip( event )
 	beetleship.x = beetleship.x + scrollSpeed
+	movesSoundChennel = audio.play(moveSound)
 
 	beetleship.alpha = beetleship.alpha + 0.01
+
 end
 
 Runtime:addEventListener("enterFrame", moveShip)
 
 
-scrollSpeed = 6
+scrollSpeed = 2
 
 
 local  secondShip =display.newImageRect("Images/octopus.png", 200, 200)
@@ -54,4 +66,4 @@ function mymoving( event )
 	secondShip.alpha= secondShip.alpha + 0.05 
 
 end
-Runtime:addEventListener("enterFrame", mymoving)
+timer:performWithDelay("enterFrame", mymoving)

@@ -41,15 +41,19 @@ local randomNumber2
 local yourAnswer
 local correctAnswer
 local wrongAnswer
-local wrongAnswerSound = audio.loadSound("Sound/Wrong Buzzer.mp3")
-
+local point=0
+--local mistake=3
 --display question and set color
  -----------------------------------------------------------------
  --object creation---
  ---------------------------------------------------------------------
-question= display.newText("", display.contentWidth/3, display.contentHeight/2, nil, 50)
+ pointText = display.newText("point = " .. point, display.contentWidth/3, display.contentHeight/2)
+ pointText.x = 500
+ pointText.y = 70
+ 
+questionText= display.newText("", display.contentWidth/3, display.contentHeight/2, nil, 50)
 
-question:setTextColor(1, 0.7, 1)
+questionText:setTextColor(1, 0.7, 1)
 
 
 --creating correct text object and its status
@@ -72,13 +76,29 @@ numericField.inputType="number"
 -------------------------------------------------------------------------------
 
 local function askMe()
-		randomOpreator = math.random(1, 2)
+		randomOpreator = math.random(1, 4)
 		-- creating 2 random number
 		randomNumber1= math.random(1, 20)
 		randomNumber2= math.random(1, 20)
-		correctAnswer = randomNumber1 + randomNumber2 
-		question.text = randomNumber1 .. "+" .. randomNumber2 .. "="
+		 if(randomOpreator == 1)then
+               correctAnswer = randomNumber1 + randomNumber2 
+               questionText.text = randomNumber1 .. "+" .. randomNumber2 .. "="
+        askMe()
+        elseif(randomOpreator== 2)then
+              correctAnswer = randomNumber1 - randomNumber2 
+            questionText.text = randomNumber1 .. "-" .. randomNumber2 .. "="
+         askMe()
+         elseif(randomOpreator == 3)then
+                correctAnswer = randomNumber1 * randomNumber2
+                questionText.text = randomNumber1 .. " * " .. randomNumber2 .. "="
+             askMe()
+         elseif(randomOpreator == 4)then
+                correctAnswer = randomNumber1 / randomNumber2
+                questionText.text = randomNumber1 .. " / " .. randomNumber2 .. "="
+            else 
+
         end
+
 local function hideAnswer( )
 			correct.isVisible=false
 			wrongAnswer.isVisible=false
@@ -89,24 +109,14 @@ local function numrictListener( event )
 		
         if(event.phase=="began") then
         elseif(event.phase=="submitted")then
-            	yourAnswer= tonumber(event.target.text)
             	event.target.text = ""
-        if(randomOpreator == 1)then
-               correctAnswer = randomNumber1 + randomNumber2 
-               question.text = randomNumber1 .. "+" .. randomNumber2 .. "="
-        askMe()
-        elseif(randomOpreator== 2)then
-              correctAnswer = randomNumber1 - randomNumber2 
-            question.text = randomNumber1 .. "-" .. randomNumber2 .. "="
-         askMe()
-         elseif(randomOpreator == 3)then
-            	correctAnswer = randomNumber1 * randomNumber2
-            	question.text = randomNumber1 .. " * " .. randomNumber2 .. "="
-             askMe()
-         elseif(randomOpreator == 3)then
-            	correctAnswer = randomNumber1 / randomNumber2
-            	question.text = randomNumber1 .. " / " .. randomNumber2 .. "="
-             askMe()
+                yourAnswer= tonumber(event.target.text)
+
+                   if(yourAnswer == correct) then
+                    point= point + 1
+                    pointText.text = "point = ".. point
+
+                    
 
 		           	timer.performWithDelay(1500, hideAnswer)
 
@@ -114,7 +124,8 @@ local function numrictListener( event )
 		   end
 		  end
         end
-       
+       end
+
 
 		
 ---------------------------------------------------------------------
