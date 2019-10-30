@@ -38,19 +38,23 @@ writeText.x=display.contentWidth/2
 writeText.y=display.contentHeight/3
 writeText:setTextColor(1, 0.6, 0.5)
 writeText.isVisible=false
-
+local function hitdeObjects( ... )
+	writeText.isVisible = false
+	myCross.isVisible = false
+end
 local function mybutton( touch )
 	if(touch.phase =="began") then
-		firstButton.isVisible=false
-		secondButton.isVisible=true
-		writeText.isVisible= true
+		firstButton.isVisible=true
+		secondButton.isVisible=false
+		writeText.isVisible= false
+
 	end
 	if(touch.phase=="ended")then
 
-	firstButton.isVisible=true
-	secondButton.isVisible=false
-	writeText.isVisible= false
-	       myCross.isVisible=false
+	firstButton.isVisible=false
+	secondButton.isVisible=true
+	writeText.isVisible= true
+    myCross.isVisible=false
 
 	end
 	end
@@ -58,6 +62,7 @@ local function mybutton( touch )
 
     local function mySecondButton( touch )
       if(touch.phase=="began")then
+      	writeText.isVisible = false
       	secondButton.isVisible= false
       	firstButton.isVisible= true
       	myCross.isVisible=true
@@ -67,7 +72,8 @@ local function mybutton( touch )
 
     secondButton.isVisible=true
     firstButton.isVisible= false
-        writeText.isVisible=false
+     writeText.isVisible=false
+     myCross.isVisible = true
 
     end
     end

@@ -46,6 +46,8 @@ local CorrectSoundCehnnel
 local wrongChennel
 local youWin
 local youLost
+local randomOpreator
+
 
 --local wrongAnswerSound = audio.loadSound("Sound/Wrong Buzzer.mp3")
 
@@ -88,14 +90,28 @@ numericField.inputType="number"
 -- LOCAL FUNCTIONS
 ---------------------------------------------------
  
-local function askMe( )
-	-- creating 2 random number
-	randomNumber1= math.random(1, 10)
-	randomNumber2= math.random(1, 10)
-	correctAnswer = randomNumber1 + randomNumber2 
-	question.text = randomNumber1 .."+" .. randomNumber2 .. "="
-end
-		
+local function askMe()
+    randomOpreator = math.random(1, 4)
+    -- creating 2 random number
+    randomNumber1= math.random(1, 20)
+    randomNumber2= math.random(1, 20)
+     if(randomOpreator == 1)then
+               correctAnswer = randomNumber1 + randomNumber2 
+               question.text = randomNumber1 .. "+" .. randomNumber2 .. "="
+        elseif(randomOpreator== 2)then
+              correctAnswer = randomNumber1 - randomNumber2 
+            question.text = randomNumber1 .. "-" .. randomNumber2 .. "="
+         elseif(randomOpreator == 3)then
+                correctAnswer = randomNumber1 * randomNumber2
+                question.text = randomNumber1 .. " * " .. randomNumber2 .. "="
+         elseif(randomOpreator == 4)then
+                correctAnswer = randomNumber1 / randomNumber2
+                question.text = randomNumber1 .. " / " .. randomNumber2 .. "="
+             
+
+        end
+		   end
+
 local function HideText( )
 	correct.isVisible=false
 	wrongAnswer.isVisible=false
@@ -149,7 +165,6 @@ local function numricListener(event)
       end
     end      
   end
- end
 
 
 ---------------------------------------------

@@ -12,7 +12,7 @@ display.setStatusBar(display.HiddenStatusBar)
 --move sound variables
 --------------------------------------------------------------------------
 
-local moveSound = audio.loadSound("Sound/muscle.mp3")
+local moveSound = audio.loadStream("Sound/bensound.mp3")
 local movesSoundChennel 
 ---------------------------------------------------------------------------------------------------------------------------
 --make a global variable

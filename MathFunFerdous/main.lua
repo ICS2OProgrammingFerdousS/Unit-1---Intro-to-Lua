@@ -28,14 +28,13 @@ local yourAnswer
 local correctAnswer
 local wrongAnswer
 local point=0
+local mistake = 3
 --local mistake=3
 --display question and set color
  -----------------------------------------------------------------
  --object creation---
  ---------------------------------------------------------------------
- pointText = display.newText("point = " .. point, display.contentWidth/3, display.contentHeight/2)
- pointText.x = 500
- pointText.y = 70
+
  
 questionText= display.newText("", display.contentWidth/3, display.contentHeight/2, nil, 50)
 
@@ -44,11 +43,9 @@ questionText:setTextColor(1, 0.7, 1)
 pointText= display.newText("Point = " .. point, display.contentWidth/1.1, display.contentHeight/4.5, Arial, 35)
 pointText:setTextColor(1, 0.4, 0.5)
 
-mistakeText= display.newText("mistake = " .. mistake, display.contentWidth/6, display.contentHeight/4.5,  Arial, 35)
-
+mistakeText= display.newText("mistakes = " .. mistake, display.contentWidth/6, display.contentHeight/4.5,  Arial, 35)
 
 --creating correct text object and its status
-
 correct= display.newText(" Correct!", display.contentWidth/2, display.contentHeight*2/3, nil, 50)
 correct:setTextColor(255/255, 255/255, 255/255)
 correct.isVisible=false
@@ -114,17 +111,17 @@ local function numrictListener( event )
 
 		   end
 		  end
-        end
-       end
+     end
+    end
 
 
 		
 ---------------------------------------------------------------------
 --add evenet listener
 ----------------------------------------------------------------------        
-			numericField:addEventListener("userInput", numrictListener)
+	  numericField:addEventListener("userInput", numrictListener)
 
-  elseif(event.phase=="submitted")then
+    if(event.phase=="submitted")then
     yourAnswer = tonumber(event.target.text)
 
     event.target.text = ""
@@ -159,7 +156,6 @@ local function numrictListener( event )
 
       end
     end      
-   end
  
 ---------------------------------------------
 -- EVENT LISTENERS
