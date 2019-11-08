@@ -9,7 +9,7 @@
     -- Your code here
     display.setStatusBar(display.HiddenStatusBar)
     -- adding background color
-    display.setDefault("background", 0, 0, 0.2)
+    display.setDefault("background", 200/255, 200/255, 200/255)
 
     -------------------------------------------------
     -- LOCAL VARIABLES
