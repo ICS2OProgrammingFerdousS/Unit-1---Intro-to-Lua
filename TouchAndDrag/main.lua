@@ -5,12 +5,12 @@
 		--
 		-- main.lua
 		--my codes
-		-------------------------------------------------------------
-		--sound variables
-		-------------------------------------------------------------
-
-		local touchSound = audio.loadSound("Sounds/Button.mp3")
-		local  buttonChennal
+-------------------------------------------------------------
+--sound variables
+-------------------------------------------------------------
+local touchSound = audio.loadSound("Sounds/PopSound.wav")
+local backgroundMusic = audio.loadSound("Sounds/TABL.wav")
+local backgroundMusicChannel
 
 		-- Your code here
 		-- hidden the statusbar
@@ -39,6 +39,11 @@
 		yellowGirl.y=500
 		blueGirl.x=300
 		blueGirl.y=200
+-- function for backgroundMusic
+local function music( event )
+local backgroundMusicChannel = audio.play(backgroundMusic)
+
+end
 		--my function for making it to do job
 		local  function blueListener( touch )
 
@@ -46,12 +51,14 @@
 
 				if(alreadyTouchedYellowGirl == false) then
 
-					alreadyTouchedBlueGirl = true
+				 alreadyTouchedBlueGirl = true
+				 local touchSound = audio.play(touchSound)
+
 				end
 			end
 
 			if ((touch.phase == "moved") and (alreadyTouchedBlueGirl==true))then
-			 buttonChennal = audio.play(touchSound)
+
 
 				blueGirl.x = touch.x
 
@@ -76,6 +83,8 @@
 		       if(alreadyTouchedBlueGirl== false) then
 		        
 		        alreadyTouchedYellowGirl = true
+		        local touchSound = audio.play(touchSound)
+
 		    end
 		   end
 
