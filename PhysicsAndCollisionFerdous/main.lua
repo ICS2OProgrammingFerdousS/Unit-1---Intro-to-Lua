@@ -24,25 +24,25 @@
 			-----------------------------------------------------------------------
 			--objects creations
 			---------------------------------------------------------------------------
-			local park=display.newImageRect("Images/road.png", 2048, 1736)
-		    park.y=-100
+			--local park=display.newImageRect("Images/road.png", 2048, 1736)
+		    --park.y=-100
 
-		    physics.addBody(park, "static", {friction=0.4, bounce= 0.4})
-		    local grass = display.newImageRect("Images/grass.png", 1020, 700)
-		    grass.x=500
-		    grass.y=700
-		     local ball=display.newImageRect("Images/football.png", 40, 40)
-		    ball.x=10
-		    ball.y=0
-		    local ball2=display.newImageRect("Images/football.png", 40, 40)
-		    ball2.x=10
-		    ball2.y=0
-		    local ball3=display.newImageRect("Images/football.png", 40, 40)
-		    ball3.x=10
-		    ball3.y=0
-		    local ball4=display.newImageRect("Images/football.png", 40, 40)
-		    ball4.x=10
-		    ball4.y=0
+		    --physics.addBody(park, "static", {friction=0.4, bounce= 0.4})
+		    --local grass = display.newImageRect("Images/grass.png", 1020, 700)
+		    --grass.x=500
+		    --grass.y=700
+local ball=display.newImageRect("Images/football.png", 40, 40)
+ball.x=10
+ball.y=0
+local ball2=display.newImageRect("Images/football.png", 40, 40)
+ball2.x=10
+ball2.y=0
+local ball3=display.newImageRect("Images/football.png", 40, 40)
+ball3.x=10
+ball3.y=0
+local ball4=display.newImageRect("Images/football.png", 40, 40)
+ball4.x=10
+ball4.y=0
 
             
 
